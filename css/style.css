@@ -1,0 +1,7 @@
+a {
+  cursor: pointer !important;
+}
+
+a.active {
+  font-weight: bold;
+}
