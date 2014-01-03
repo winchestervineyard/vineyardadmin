@@ -15,17 +15,25 @@
       <div class='container'>
         <h1>vineyard admin area</h1>
         <nav class='navbar navbar-default'>
-          <div class='navbar-header'>
-            <div class='navbar-brand'>Manage:</div>
-          </div>
           <ul class='nav navbar-nav' style='margin-bottom: 0px'>
             {{#link-to "news" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>news</a>{{/link-to}}
             {{#link-to "talks" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>talks</a>{{/link-to}}
+            {{#link-to "login" tagName="li" href=false}}<a {{bindAttr href="view.href"}}>account</a>{{/link-to}}
           </ul>
         </nav>
         {{ outlet }}
         </div>
       </div>
+    </script>
+
+    <script type="text/x-handlebars" id="login">
+      <form class="form-inline" {{action login on="submit"}}>
+        <h2>log in</h2>
+        {{input value=email type="text" placeholder="E-mail"}}
+        {{input value=password type="password" placeholder="Password"}}
+        {{input class="btn btn-default" type="submit" value="Log In"}}
+      </form>
+      <button {{action 'logout'}} class='btn btn-default' type='button'>Logout</button>
     </script>
 
     <script type='text/x-handlebars' id='news'>
@@ -125,6 +133,7 @@
       <script src="/js/handlebars-v1.3.0.js"></script>
       <script src="/js/ember.js"></script>
       <script src="//cdn.firebase.com/v0/firebase.js" type='text/javascript'></script>
+      <script src='https://cdn.firebase.com/v0/firebase-simple-login.js' type='text/javascript'></script>
       <script src="/js/emberfire-latest.js"></script>
       <script src="/js/bootstrap.min.js" type='text/javascript'></script>
       <script src="/js/strftime.min.js" type='text/javascript'></script>

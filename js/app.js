@@ -1,10 +1,21 @@
-App = Ember.Application.create();
+var appUser;
+
+App = Ember.Application.create({
+  ready: function() {
+    new FirebaseSimpleLogin(new Firebase('https://winvin.firebaseio.com'), function(error, user) {
+      if (user && !error) {
+        appUser = user;
+      }
+    });
+  }
+});
 
 App.Router.map(function() {
   this.resource("news", function() {
     this.resource("news-item", { path: ':news_item_id' });
   });
   this.resource("talks");
+  this.resource("login");
 });
 
 App.NewsController = Ember.ArrayController.extend({
@@ -23,7 +34,35 @@ App.NewsController = Ember.ArrayController.extend({
   }
 });
 
+App.LoginController = Ember.Controller.extend({
+  actions: {
+    login: function() {
+      var self = this;
+      new FirebaseSimpleLogin(new Firebase('https://winvin.firebaseio.com'), function(error, user) {
+        if (error) {
+          alert("Error: " + error);
+          self.transitionToRoute('login');
+          return;
+        } else if (user) {
+          appUser = user;
+          self.transitionToRoute('news');
+        }
+      }).login("password", this.getProperties("email", "password"));
+    },
+    logout: function() {
+      new FirebaseSimpleLogin(new Firebase('https://winvin.firebaseio.com'), function() {}).logout();
+      appUser = null;
+      this.transitionToRoute('/');
+    }
+  }
+});
+
 App.NewsRoute = Ember.Route.extend({
+  activate: function() {
+    if (!appUser) {
+      this.transitionTo('login');
+    }
+  },
   model: function() {
     return EmberFire.Array.create({
       ref: new Firebase("https://winvin.firebaseio.com/news")
@@ -32,6 +71,11 @@ App.NewsRoute = Ember.Route.extend({
 });
 
 App.NewsItemRoute = Ember.Route.extend({
+  activate: function() {
+    if (!appUser) {
+      this.transitionTo('login');
+    }
+  },
   model: function(params) {
     return EmberFire.Object.create({
       ref: new Firebase("https://winvin.firebaseio.com/news/" + params.news_item_id)
