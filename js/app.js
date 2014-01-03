@@ -22,3 +22,7 @@ App.NewsItemRoute = Ember.Route.extend({
     });
   }
 });
+
+Ember.Handlebars.helper('format-date', function(date) {
+  return new Date(date).strftime("%a %d %b %Y %H:%M%P");
+});
