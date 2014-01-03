@@ -39,6 +39,9 @@
               {{#link-to "news-item" this}}
               {{ title }}
               {{/link-to}}
+              {{#if published}}
+                <span class='badge'>Live</span>
+              {{/if}}
               <br/>
               <span class='text-muted'>{{ format-date datetime }}</span>
             </li>
