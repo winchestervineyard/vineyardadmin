@@ -18,22 +18,6 @@ App.Router.map(function() {
   this.resource("login");
 });
 
-App.NewsController = Ember.ArrayController.extend({
-  actions: {
-    new: function() {
-      var newItem = this.get("model").ref.push();
-      newItem.set({id: newItem.name(), title: "New title"});
-      this.transitionToRoute('news-item', newItem.name());
-    },
-    remove: function(foo) {
-      if (confirm("Are you sure?")) {
-        this.removeObject(foo);
-        this.transitionToRoute('news');
-      }
-    }
-  }
-});
-
 App.LoginController = Ember.Controller.extend({
   actions: {
     login: function() {
@@ -53,6 +37,22 @@ App.LoginController = Ember.Controller.extend({
       new FirebaseSimpleLogin(new Firebase('https://winvin.firebaseio.com'), function() {}).logout();
       appUser = null;
       this.transitionToRoute('/');
+    }
+  }
+});
+
+App.NewsController = Ember.ArrayController.extend({
+  actions: {
+    new: function() {
+      var newItem = this.get("model").ref.push();
+      newItem.set({id: newItem.name(), title: "New title"});
+      this.transitionToRoute('news-item', newItem.name());
+    },
+    remove: function(foo) {
+      if (confirm("Are you sure?")) {
+        this.removeObject(foo);
+        this.transitionToRoute('news');
+      }
     }
   }
 });
