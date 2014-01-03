@@ -1,7 +1,12 @@
 a {
   cursor: pointer !important;
+  text-decoration: none !important;
 }
 
 a.active {
   font-weight: bold;
+}
+
+li.published-true {
+  background: #efe;
 }

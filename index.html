@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>Winchester Vineyard ADMIN</title>
-    <link href="/favicon.ico" rel="icon" type="image/x-icon">
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/font-awesome.min.css" rel="stylesheet">
-    <link href="//winvin-style-guide.herokuapp.com/css/style.css" rel="stylesheet">
+    <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="//winvin-style-guide.herokuapp.com/css/style.css" rel="stylesheet"/>
   </head>
 
   <body>
@@ -33,22 +32,35 @@
       <div class='row'>
         <div class='col-md-3'>
           <h3>news</h3>
+          <button {{action 'new'}} class='btn btn-default' type='button'>
+            Add a new story
+          </button>
+          <br/>
+          <br/>
           <ul class='list-group'>
             {{#each}}
-            <li class='list-group-item'>
-              {{#link-to "news-item" this}}
+            <li class='list-group-item clearfix'>
               {{ title }}
-              {{/link-to}}
               {{#if published}}
-                <span class='badge'>Live</span>
+                (Published)
               {{/if}}
               <br/>
+              {{#if datetime }}
               <span class='text-muted'>{{ format-date datetime }}</span>
+              {{/if}}
+              <br/>
+              <br/>
+              {{#link-to "news-item" this class='btn btn-default'}}
+              Edit
+              {{/link-to}}
+              <button {{action 'remove' this}} class='btn btn-default' type='button'>
+                Delete
+              </button>
             </li>
             {{/each}}
           </ul>
         </div>
-        <div class='col-md-9'>
+        <div class='col-md-8'>
           {{ outlet }}
         </div>
     </script>
@@ -95,7 +107,7 @@
 
     <script type='text/x-handlebars' id='talks'>
       <div class='row'>
-        <div class='col-md-3'>
+        <div class='col-md-4'>
           <h3>talks</h3>
           <ul class='list-group'>
             <li class='list-group-item'>Talk: 4th Sep 2013</li>

@@ -7,6 +7,22 @@ App.Router.map(function() {
   this.resource("talks");
 });
 
+App.NewsController = Ember.ArrayController.extend({
+  actions: {
+    new: function() {
+      var newItem = this.get("model").ref.push();
+      newItem.set({id: newItem.name(), title: "New title"});
+      this.transitionToRoute('news-item', newItem.name());
+    },
+    remove: function(foo) {
+      if (confirm("Are you sure?")) {
+        this.removeObject(foo);
+        this.transitionToRoute('news');
+      }
+    }
+  }
+});
+
 App.NewsRoute = Ember.Route.extend({
   model: function() {
     return EmberFire.Array.create({
@@ -24,5 +40,10 @@ App.NewsItemRoute = Ember.Route.extend({
 });
 
 Ember.Handlebars.helper('format-date', function(date) {
-  return new Date(date).strftime("%a %d %b %Y %H:%M%P");
+  date = new Date(date);
+  if (isNaN(date.getTime())) {
+    return "Invalid date";
+  } else {
+    return date.strftime("%a %d %b %Y %H:%M%P");
+  }
 });
