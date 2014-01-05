@@ -14,7 +14,9 @@ App.Router.map(function() {
   this.resource("news", function() {
     this.resource("news-item", { path: ':news_item_id' });
   });
-  this.resource("talks");
+  this.resource("talks", function() {
+    this.resource("talk", { path: ':talk_id' });
+  });
   this.resource("login");
 });
 
@@ -57,6 +59,22 @@ App.NewsController = Ember.ArrayController.extend({
   }
 });
 
+App.TalksController = Ember.ArrayController.extend({
+  actions: {
+    new: function() {
+      var newItem = this.get("model").ref.push();
+      newItem.set({id: newItem.name(), title: "New talk"});
+      this.transitionToRoute('talk', newItem.name());
+    },
+    remove: function(foo) {
+      if (confirm("Are you sure?")) {
+        this.removeObject(foo);
+        this.transitionToRoute('talks');
+      }
+    }
+  }
+});
+
 App.NewsRoute = Ember.Route.extend({
   activate: function() {
     if (!appUser) {
@@ -70,6 +88,19 @@ App.NewsRoute = Ember.Route.extend({
   }
 });
 
+App.TalksRoute = Ember.Route.extend({
+  activate: function() {
+    if (!appUser) {
+      this.transitionTo('login');
+    }
+  },
+  model: function() {
+    return EmberFire.Array.create({
+      ref: new Firebase("https://winvin.firebaseio.com/talks")
+    });
+  }
+});
+
 App.NewsItemRoute = Ember.Route.extend({
   activate: function() {
     if (!appUser) {
@@ -79,6 +110,19 @@ App.NewsItemRoute = Ember.Route.extend({
   model: function(params) {
     return EmberFire.Object.create({
       ref: new Firebase("https://winvin.firebaseio.com/news/" + params.news_item_id)
+    });
+  }
+});
+
+App.TalkRoute = Ember.Route.extend({
+  activate: function() {
+    if (!appUser) {
+      this.transitionTo('login');
+    }
+  },
+  model: function(params) {
+    return EmberFire.Object.create({
+      ref: new Firebase("https://winvin.firebaseio.com/talks/" + params.talk_id)
     });
   }
 });
