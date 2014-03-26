@@ -22,8 +22,8 @@
       </div>
       <div class='form-group'>
         <label for='subjectText'>Text</label>
-        <input type='text' id='subjectText' class='form-control' ng-model='subject.text'/>
-      </div>
+        <textarea rows='10' id='subjectText' class='form-control' ng-model='subject.text'/>
+      </textarea>
       <div class='form-group'>
         <label for='subjectDatetime'>Date/time</label>
         <input type='text' id='subjectDatetime' class='form-control' ng-model='subject.datetime'/>
@@ -42,7 +42,8 @@
       <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='subject == item'>Not published</button>
     </td>
     <td>
-      <button class='btn btn-default' ng-click='edit(item)'>Edit</button>
+      <button class='btn btn-default' ng-hide='item == subject' ng-click='edit(item)'>Edit</button>
+      <button class='btn btn-default' ng-show='item == subject' ng-click='doneEditing()'>Done</button>
     </td>
   </td>
   </tr>
