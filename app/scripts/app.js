@@ -14,6 +14,7 @@ define([
   'directives',
   'controllers',
   'controllers/main',
+  'controllers/news',
   'controllers/login'
 ], function(angular) {
 

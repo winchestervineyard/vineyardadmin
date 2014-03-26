@@ -15,8 +15,18 @@ define([
       templateUrl: 'views/login.html',
       controller: 'LoginController'
     })
+    .when('/news', {
+      authRequired: true,
+      templateUrl: 'views/news.html',
+      controller: 'NewsController'
+    })
     .otherwise({
       redirectTo: '/'
+    });
+  }).run(function($rootScope, $location) {
+    var path = function() { return $location.path(); };
+    $rootScope.$watch(path, function(newVal, oldVal){
+      $rootScope.activetab = newVal;
     });
   });
 });

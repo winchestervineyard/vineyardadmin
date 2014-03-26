@@ -1,0 +1,49 @@
+<h1>News items</h1>
+
+<div ng-show='errorMessage'>
+  <div class='alert alert-danger'>
+    <button type="button" class="close" ng-click='errorMessage = null' aria-hidden="true">&times;</button>
+    <span>{{errorMessage}}</span>
+  </div>
+</div>
+
+<table class='table'>
+  <thead>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Date</th>
+    <th colspan='10'></th>
+  </thead>
+  <div ng-show='subject'>
+    <form role='form'>
+      <div class='form-group'>
+        <label for='subjectTitle'>Title</label>
+        <input type='text' id='subjectTitle' class='form-control' ng-model='subject.title'/>
+      </div>
+      <div class='form-group'>
+        <label for='subjectText'>Text</label>
+        <input type='text' id='subjectText' class='form-control' ng-model='subject.text'/>
+      </div>
+      <div class='form-group'>
+        <label for='subjectDatetime'>Date/time</label>
+        <input type='text' id='subjectDatetime' class='form-control' ng-model='subject.datetime'/>
+      </div>
+      <button class='btn btn-default' ng-click='doneEditing()'>Close</button>
+    </form>
+  </div>
+  <tr ng-repeat='item in news'>
+    <td>
+      {{item.title}}
+    </td>
+    <td>{{item.text | limitTo: 50}}...</td>
+    <td>{{item.datetime | date:'medium'}}</td>
+    <td>
+      <button class='btn btn-info' ng-click='item.published = false' ng-show='item.published'>Published</button>
+      <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='subject == item'>Not published</button>
+    </td>
+    <td>
+      <button class='btn btn-default' ng-click='edit(item)'>Edit</button>
+    </td>
+  </td>
+  </tr>
+</table>
