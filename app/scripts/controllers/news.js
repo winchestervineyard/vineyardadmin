@@ -14,12 +14,24 @@ define(['controllers'], function(controllers) {
       $scope.editing = true;
       $scope.errorMessage = '';
       $scope.news[id]['edited_at'] = new Date();
+      $scope.news[id]['id'] = id;
       $scope.news[id]['last_edited_by'] = $scope.auth.user.email;
     };
 
     $scope.editingThis = function(item) {
       return $scope.editing && $scope.news[$scope.id] == item;
     }
+
+    $scope.newItem = function() {
+      var newItem = {title: "New"};
+      $scope.news.$add(newItem).then(function(ref) {
+        $scope.edit(ref.name());
+      });
+    };
+
+    $scope.delete = function(id) {
+      $scope.news.$remove(id);
+    };
 
     $scope.doneEditing = function() {
       $scope.editing = false;
