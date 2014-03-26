@@ -1,5 +1,5 @@
 define([], function() {
-  "use strict";
+  'use strict';
 
   return function(key) {
     return function($scope, syncData) {
@@ -15,9 +15,9 @@ define([], function() {
         }
         $scope.editing = true;
         $scope.errorMessage = '';
-        $scope[key][id]['edited_at'] = new Date();
+        $scope[key][id].edited_at = new Date();
         $scope[key][id].id = id;
-        $scope[key][id]['last_edited_by'] = $scope.auth.user.email;
+        $scope[key][id].last_edited_by = $scope.auth.user.email;
       };
 
       $scope.editingThis = function(item) {
