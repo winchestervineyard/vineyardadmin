@@ -14,19 +14,19 @@
     <th>Date</th>
     <th colspan='10'></th>
   </thead>
-  <div ng-show='subject'>
+  <div ng-show='editing'>
     <form role='form'>
       <div class='form-group'>
         <label for='subjectTitle'>Title</label>
-        <input type='text' id='subjectTitle' class='form-control' ng-model='subject.title'/>
+        <input type='text' id='subjectTitle' class='form-control' ng-model='news[id].title'/>
       </div>
       <div class='form-group'>
         <label for='subjectText'>Text</label>
-        <textarea rows='10' id='subjectText' class='form-control' ng-model='subject.text'/>
+        <textarea rows='10' id='subjectText' class='form-control' ng-model='news[id].text'/>
       </textarea>
       <div class='form-group'>
         <label for='subjectDatetime'>Date/time</label>
-        <input type='text' id='subjectDatetime' class='form-control' ng-model='subject.datetime'/>
+        <input type='text' id='subjectDatetime' class='form-control' ng-model='news[id].datetime'/>
       </div>
       <button class='btn btn-default' ng-click='doneEditing()'>Close</button>
     </form>
@@ -39,11 +39,11 @@
     <td>{{item.datetime | date:'medium'}}</td>
     <td>
       <button class='btn btn-info' ng-click='item.published = false' ng-show='item.published'>Published</button>
-      <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='subject == item'>Not published</button>
+      <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='editingThis(item)'>Not published</button>
     </td>
     <td>
-      <button class='btn btn-default' ng-hide='item == subject' ng-click='edit(item)'>Edit</button>
-      <button class='btn btn-default' ng-show='item == subject' ng-click='doneEditing()'>Done</button>
+      <button class='btn btn-default' ng-hide='item.published || editingThis(item)' ng-click='edit(item.id)'>Edit</button>
+      <button class='btn btn-default' ng-show='editingThis(item)' ng-click='doneEditing()'>Done</button>
     </td>
   </td>
   </tr>
