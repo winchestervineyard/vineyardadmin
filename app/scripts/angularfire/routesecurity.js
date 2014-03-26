@@ -1,7 +1,6 @@
-(function (angular) {
+define(['angular'], function(angular) {
   'use strict';
-  angular.module('vineyardadminApp')
-    .run(function ($injector, $location, $rootScope, loginRedirectPath) {
+  angular.module('angularfire.routesecurity', ['firebase']).run(function ($injector, $location, $rootScope, loginRedirectPath) {
       if ($injector.has('$route')) {
         new RouteSecurityManager($location, $rootScope, $injector.get('$route'), loginRedirectPath);
       }
@@ -78,4 +77,4 @@
       }
     }
   };
-})(angular);
+});

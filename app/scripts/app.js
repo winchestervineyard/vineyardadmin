@@ -1,26 +1,36 @@
-'use strict';
+define([
+  'angular',
+  'angularRoute',
+  'angularCookies',
+  'angularSanitize',
+  'firebaseSimpleLogin',
+  'angularfire/config',
+  'angularfire/routesecurity',
+  'angularfire/simpleLoginTools',
+  'angularFire',
+  'services/firebase',
+  'services/login',
+  'filters',
+  'directives',
+  'controllers',
+  'controllers/main',
+  'controllers/login'
+], function(angular) {
 
-angular.module('vineyardadminApp', [
-  'ngCookies',
-  'ngSanitize',
-  'ngRoute',
-  'firebase',
-  'angularfire.firebase',
-  'angularfire.login',
-  'simpleLoginTools'
-])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/login', {
-        authRequired: false, // if true, must log in before viewing this page
-        templateUrl: 'views/login.html',
-        controller: 'LoginController'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+  'use strict';
+
+  return angular.module('vineyardadminApp', [
+    'ngCookies',
+    'ngSanitize',
+    'ngRoute',
+    'angularfire.routesecurity',
+    'angularfire.login',
+    'angularfire.config',
+    'angularfire.simpleLoginTools',
+    'vineyardadmin.controllers',
+    'vineyardadmin.services',
+    'vineyardadmin.filters',
+    'vineyardadmin.directives'
+  ]);
+});
+

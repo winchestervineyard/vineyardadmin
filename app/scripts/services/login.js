@@ -1,11 +1,9 @@
-'use strict';
-angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
+define(['angular', 'services/firebase'], function(angular) {
+  'use strict';
 
-  .run(function(simpleLogin) {
+  return angular.module('angularfire.login', ['firebase', 'angularfire.firebase']).run(function(simpleLogin) {
     simpleLogin.init();
-  })
-
-  .factory('simpleLogin', function($rootScope, $firebaseSimpleLogin, firebaseRef, profileCreator, $timeout) {
+  }).factory('simpleLogin', function($rootScope, $firebaseSimpleLogin, firebaseRef, profileCreator, $timeout) {
     function assertAuth() {
       if( auth === null ) { throw new Error('Must call loginService.init() before using its methods'); }
     }
@@ -24,11 +22,11 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
 
 
       /**
-       * @param {string} email
-       * @param {string} pass
-       * @param {Function} [callback]
-       * @returns {*}
-       */
+      * @param {string} email
+      * @param {string} pass
+      * @param {Function} [callback]
+      * @returns {*}
+      */
       loginPassword: function(email, pass, callback) {
         assertAuth();
         auth.$login('password', {
@@ -36,13 +34,13 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
           password: pass,
           rememberMe: true
         }).then(function(user) {
-            if( callback ) {
-              //todo-bug https://github.com/firebase/angularFire/issues/199
-              $timeout(function() {
-                callback(null, user);
-              });
-            }
-          }, callback);
+          if( callback ) {
+            //todo-bug https://github.com/firebase/angularFire/issues/199
+            $timeout(function() {
+              callback(null, user);
+            });
+          }
+        }, callback);
       },
 
       changePassword: function(opts) {
@@ -56,7 +54,7 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
         }
         else {
           auth.$changePassword(opts.email, opts.oldpass, opts.newpass)
-            .then(function() { cb(null); }, cb);
+          .then(function() { cb(null); }, cb);
         }
       },
 
@@ -91,5 +89,5 @@ angular.module('angularfire.login', ['firebase', 'angularfire.firebase'])
         }
       });
     };
-
   });
+});

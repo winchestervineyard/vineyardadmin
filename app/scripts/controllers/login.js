@@ -1,7 +1,7 @@
-'use strict';
+define(['angular', 'controllers'], function(angular, controllers) {
+  'use strict';
 
-angular.module('vineyardadminApp')
-  .controller('LoginController', function($scope, simpleLogin, $location) {
+  controllers.controller('LoginController', function($scope, simpleLogin, $location) {
     $scope.pass = null;
     $scope.err = null;
     $scope.email = null;
@@ -57,5 +57,5 @@ angular.module('vineyardadminApp')
         });
       }
     };
-
   });
+});

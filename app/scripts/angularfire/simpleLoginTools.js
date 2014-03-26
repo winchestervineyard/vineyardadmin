@@ -1,34 +1,35 @@
-'use strict';
+define(['angular'], function(angular) {
+  'use strict';
 
-/**
- * This module monitors angularFire's authentication and performs actions based on authentication state.
- * directives/directive.ngcloakauth.js depends on this file
- *
- * Modify ng-cloak to hide content until FirebaseSimpleLogin resolves. Also
- * provides ng-show-auth methods for displaying content only when certain login
- * states are active.
- *
- * Just like other ng-cloak ops, this works best if you put the following into your CSS:
- [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-        display: none !important;
-   }
- *
- * See usage examples here: https://gist.github.com/katowulf/7328023
- */
-angular.module('simpleLoginTools', [])
+  /**
+  * This module monitors angularFire's authentication and performs actions based on authentication state.
+  * directives/directive.ngcloakauth.js depends on this file
+  *
+  * Modify ng-cloak to hide content until FirebaseSimpleLogin resolves. Also
+  * provides ng-show-auth methods for displaying content only when certain login
+  * states are active.
+  *
+  * Just like other ng-cloak ops, this works best if you put the following into your CSS:
+  [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+  }
+  *
+  * See usage examples here: https://gist.github.com/katowulf/7328023
+  */
+  angular.module('angularfire.simpleLoginTools', [])
 
-/**
- * A service that returns a promise object, which is resolved once $firebaseSimpleLogin
- * is initialized.
- *
- * <code>
- *    function(waitForAuth) {
- *        waitForAuth.then(function() {
- *            console.log('auth initialized');
- *        });
- *    }
- * </code>
- */
+  /**
+  * A service that returns a promise object, which is resolved once $firebaseSimpleLogin
+  * is initialized.
+  *
+  * <code>
+  *    function(waitForAuth) {
+  *        waitForAuth.then(function() {
+  *            console.log('auth initialized');
+  *        });
+  *    }
+  * </code>
+  */
   .service('waitForAuth', function($rootScope, $q, $timeout) {
     function fn(err) {
       if($rootScope.auth) {
@@ -48,14 +49,14 @@ angular.module('simpleLoginTools', [])
     return def.promise;
   })
 
-/**
- * A directive that wraps ng-cloak so that, instead of simply waiting for Angular to compile, it waits until
- * waitForAuth resolves (in other words, until the user's login status resolves via Firebase)
- *
- * <code>
- *    <div ng-cloak-auth>Authentication has resolved.</div>
- * </code>
- */
+  /**
+  * A directive that wraps ng-cloak so that, instead of simply waiting for Angular to compile, it waits until
+  * waitForAuth resolves (in other words, until the user's login status resolves via Firebase)
+  *
+  * <code>
+  *    <div ng-cloak-auth>Authentication has resolved.</div>
+  * </code>
+  */
   .config(function($provide) {
     // adapt ng-cloak to wait for auth before it does its magic
     $provide.decorator('ngCloakDirective', function($delegate, waitForAuth) {
@@ -73,16 +74,16 @@ angular.module('simpleLoginTools', [])
     });
   })
 
-/**
- * A directive that shows elements only when the given authentication state is in effect
- *
- * <code>
- *    <div ng-show-auth="login">{{auth.user.id}} is logged in</div>
- *    <div ng-show-auth="logout">Logged out</div>
- *    <div ng-show-auth="error">An error occurred: {{auth.error}}</div>
- *    <div ng-show-auth="logout,error">This appears for logout or for error condition!</div>
- * </code>
- */
+  /**
+  * A directive that shows elements only when the given authentication state is in effect
+  *
+  * <code>
+  *    <div ng-show-auth="login">{{auth.user.id}} is logged in</div>
+  *    <div ng-show-auth="logout">Logged out</div>
+  *    <div ng-show-auth="error">An error occurred: {{auth.error}}</div>
+  *    <div ng-show-auth="logout,error">This appears for logout or for error condition!</div>
+  * </code>
+  */
   .directive('ngShowAuth', function ($rootScope) {
     var loginState = 'logout';
     $rootScope.$on('$firebaseSimpleLogin:login',  function() { loginState = 'login'; });
@@ -144,3 +145,4 @@ angular.module('simpleLoginTools', [])
       }
     };
   });
+});
