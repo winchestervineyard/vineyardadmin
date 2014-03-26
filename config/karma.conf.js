@@ -4,29 +4,24 @@
 module.exports = function(config) {
   config.set({
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'requirejs'],
 
     // list of files / patterns to load in the browser
     files: [
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/bower_components/angular-cookies/angular-cookies.js',
-      'app/bower_components/angular-sanitize/angular-sanitize.js',
-      'app/bower_components/angular-route/angular-route.js',
-      'app/bower_components/firebase/firebase.js',
-      'app/bower_components/angularfire/angularfire.js',
-      'app/bower_components/firebase-simple-login/firebase-simple-login.js',
-      'app/scripts/*.js',
-      'app/scripts/**/*.js',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js'
+      {pattern: 'app/scripts/*.js', included: false},
+      {pattern: 'app/scripts/**/*.js', included: false},
+      {pattern: 'test/spec/**/*.js', included: false},
+      {pattern: 'app/bower_components/**/*.js', included: false},
+      'test/main-test.js'
     ],
 
     // list of files / patterns to exclude
-    exclude: [],
+    exclude: [
+      'app/scripts/main.js'
+    ],
 
     // web server port
     port: 8080,

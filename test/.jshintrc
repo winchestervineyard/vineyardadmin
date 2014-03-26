@@ -23,6 +23,7 @@
     "afterEach": false,
     "angular": false,
     "before": false,
+    "define": false,
     "beforeEach": false,
     "browser": false,
     "describe": false,
