@@ -1,2 +1,71 @@
-<h1>News items</h1><div ng-show="errorMessage"><div class="alert alert-danger"><button type="button" class="close" ng-click="errorMessage = null" aria-hidden="true">&times;</button> <span>{{errorMessage}}</span></div></div><button class="btn btn-default" ng-hide="editing" ng-click="newItem()">New item</button><div ng-show="editing"><form role="form"><div class="form-group"><label for="subjectTitle">Title</label><input type="text" id="subjectTitle" class="form-control" ng-model="news[id].title"></div><div class="form-group"><label for="subjectText">Text</label><textarea rows="5" id="subjectText" class="form-control" ng-model="news[id].text">
-      </textarea></div><div class="form-group"><label for="subjectImageURL">Image URL</label><input type="text" id="subjectImageURL" class="form-control" ng-model="news[id].image_url"></div><div class="form-group"><label for="subjectDatetime">Date and time of event</label><input type="text" id="subjectDatetime" class="form-control" ng-model="news[id].datetime"></div><div class="form-group"><label for="subjectLocation">Location</label><input type="text" id="subjectLocation" class="form-control" ng-model="news[id].location_title"></div><div class="form-group"><label for="subjectLocationURL">Location URL</label><input type="text" id="subjectLocationURL" class="form-control" ng-model="news[id].location_url"></div><div class="form-group"><label for="subjectBookingURL">Booking URL</label><input type="text" id="subjectBookingURL" class="form-control" ng-model="news[id].booking_url"></div><button class="btn btn-default" ng-click="doneEditing()">Close</button></form></div><table class="table"><thead><th>Title</th><th>Text</th><th>Date</th><th colspan="10"></th><tr ng-repeat="item in news | orderByPriority"><td width="250">{{item.title}}</td><td>{{item.text}}</td><td>{{item.datetime | date:'medium'}}</td><td width="50px"><button class="btn btn-info" ng-click="item.published = false" ng-show="item.published">Published</button> <button class="btn btn-danger" ng-click="item.published = true" ng-hide="item.published" ng-disabled="editingThis(item)">Not published</button></td><td width="50px"><button class="btn btn-default" ng-hide="item.published || editingThis(item)" ng-click="edit(item.id)">Edit</button> <button class="btn btn-default" ng-show="editingThis(item)" ng-click="doneEditing()">Done</button></td><td width="50px"><button class="btn btn-default" ng-hide="item.published || editingThis(item)" ng-click="delete(item.id)">Delete</button></td></table>
+<h1>News items</h1>
+
+<div ng-show='errorMessage'>
+  <div class='alert alert-danger'>
+    <button type="button" class="close" ng-click='errorMessage = null' aria-hidden="true">&times;</button>
+    <span>{{errorMessage}}</span>
+  </div>
+</div>
+
+<button class='btn btn-default' ng-hide='editing' ng-click='newItem()'>New item</button>
+
+<div ng-show='editing'>
+  <form role='form'>
+    <div class='form-group'>
+      <label for='subjectTitle'>Title</label>
+      <input type='text' id='subjectTitle' class='form-control' ng-model='news[id].title'/>
+    </div>
+    <div class='form-group'>
+      <label for='subjectText'>Text</label>
+      <textarea rows='5' id='subjectText' class='form-control' ng-model='news[id].text'>
+      </textarea>
+    </div>
+    <div class='form-group'>
+      <label for='subjectImageURL'>Image URL</label>
+      <input type='text' id='subjectImageURL' class='form-control' ng-model='news[id].image_url'/>
+    </div>
+    <div class='form-group'>
+      <label for='subjectDatetime'>Date and time of event</label>
+      <input type='text' id='subjectDatetime' class='form-control' ng-model='news[id].datetime'/>
+    </div>
+    <div class='form-group'>
+      <label for='subjectLocation'>Location</label>
+      <input type='text' id='subjectLocation' class='form-control' ng-model='news[id].location_title'/>
+    </div>
+    <div class='form-group'>
+      <label for='subjectLocationURL'>Location URL</label>
+      <input type='text' id='subjectLocationURL' class='form-control' ng-model='news[id].location_url'/>
+    </div>
+    <div class='form-group'>
+      <label for='subjectBookingURL'>Booking URL</label>
+      <input type='text' id='subjectBookingURL' class='form-control' ng-model='news[id].booking_url'/>
+    </div>
+    <button class='btn btn-default' ng-click='doneEditing()'>Close</button>
+  </form>
+</div>
+<table class='table'>
+  <thead>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Date</th>
+    <th colspan='10'></th>
+  </thead>
+  <tr ng-repeat='item in news | orderByPriority'>
+    <td width='250'>
+      {{item.title}}
+    </td>
+    <td>{{item.text}}</td>
+    <td>{{item.datetime | date:'medium'}}</td>
+    <td width='50px'>
+      <button class='btn btn-info' ng-click='item.published = false' ng-show='item.published'>Published</button>
+      <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='editingThis(item)'>Not published</button>
+    </td>
+    <td width='50px'>
+      <button class='btn btn-default' ng-hide='item.published || editingThis(item)' ng-click='edit(item.id)'>Edit</button>
+      <button class='btn btn-default' ng-show='editingThis(item)' ng-click='doneEditing()'>Done</button>
+    </td>
+    <td width='50px'>
+      <button class='btn btn-default' ng-hide='item.published || editingThis(item)' ng-click='delete(item.id)'>Delete</button>
+    </td>
+  </tr>
+</table>
