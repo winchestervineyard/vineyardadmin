@@ -1,8 +1,8 @@
 define(['angular', 'services/firebase'], function(angular) {
   'use strict';
 
-  return angular.module('angularfire.login', ['firebase', 'angularfire.firebase']).run(function(simpleLogin) {
-    simpleLogin.init();
+  return angular.module('angularfire.login', ['firebase', 'angularfire.firebase']).run(function($rootScope, simpleLogin) {
+    $rootScope.auth = simpleLogin.init();
   }).factory('simpleLogin', function($rootScope, $firebaseSimpleLogin, firebaseRef, profileCreator, $timeout) {
     function assertAuth() {
       if( auth === null ) { throw new Error('Must call loginService.init() before using its methods'); }
