@@ -15,8 +15,25 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-build-control');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    buildcontrol: {
+      options: {
+        dir: 'dist',
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+      },
+      pages: {
+        options: {
+          remote: 'git@github.com:winchestervineyard/vineyardadmin.git',
+          branch: 'gh-pages'
+        }
+      },
+    },
 
     // Project settings
     yeoman: {
