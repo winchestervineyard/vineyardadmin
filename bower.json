@@ -13,7 +13,8 @@
     "angular-route": "1.2.6",
     "firebase": "~1.0.2",
     "angularfire": "~0.7.0",
-    "firebase-simple-login": "~1.0.2"
+    "firebase-simple-login": "~1.0.2",
+    "angular-bootstrap-datetimepicker": "latest"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",
