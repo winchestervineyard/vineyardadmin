@@ -11,7 +11,7 @@ define([
       controller: 'MainCtrl'
     })
     .when('/login', {
-      authRequired: false, // if true, must log in before viewing this page
+      authRequired: false,
       templateUrl: 'views/login.html',
       controller: 'LoginController'
     })
@@ -20,12 +20,17 @@ define([
       templateUrl: 'views/news.html',
       controller: 'NewsController'
     })
+    .when('/talks', {
+      authRequired: true,
+      templateUrl: 'views/talks.html',
+      controller: 'TalksController'
+    })
     .otherwise({
       redirectTo: '/'
     });
   }).run(function($rootScope, $location) {
     var path = function() { return $location.path(); };
-    $rootScope.$watch(path, function(newVal, oldVal){
+    $rootScope.$watch(path, function(newVal){
       $rootScope.activetab = newVal;
     });
   });
