@@ -9,7 +9,9 @@ require.config({
     angularMocks: '../../bower_components/angular-mocks/angular-mocks',
     angularFire: '../../bower_components/angularfire/angularfire',
     firebase: '../../bower_components/firebase/firebase',
-    firebaseSimpleLogin: '../../bower_components/firebase-simple-login/firebase-simple-login'
+    firebaseSimpleLogin: '../../bower_components/firebase-simple-login/firebase-simple-login',
+    moment: '../../bower_components/moment/moment',
+    angularBootstrapDatetimepicker: '../../bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker'
   },
   shim: {
     angular: {
@@ -21,6 +23,7 @@ require.config({
     angularSanitize: [ 'angular' ],
     firebaseSimpleLogin: ['firebase'],
     angularFire: [ 'angular', 'firebase'],
+    angularBootstrapDatetimepicker: ['angular', 'moment', 'bootstrap'],
     angularMocks: {
       deps: ['angular'],
       exports: 'angular.mock'

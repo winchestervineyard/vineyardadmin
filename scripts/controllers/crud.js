@@ -6,7 +6,6 @@ define([], function() {
       syncData(key).$bind($scope, key);
 
       $scope.edit = function(id) {
-        console.log($scope[key]);
         $scope.id = id;
         if ($scope[key][id].published) {
           $scope.errorMessage = 'Please unpublish this ' + key + ' before editing.';
