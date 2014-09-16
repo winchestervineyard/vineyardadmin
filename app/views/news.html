@@ -25,9 +25,14 @@
       <input type='text' id='subjectImageURL' class='form-control' ng-model='news[id].image_url'/>
     </div>
     <div class='form-group'>
-      <label for='subjectDatetime'>Date and time of event</label>
+      <label for='subjectDatetime'>Start date and time of event</label>
       <input type='text' id='subjectDatetime' class='form-control' ng-model='news[id].datetime'/>
       <datetimepicker data-ng-model="news[id].datetime"></datetimepicker>
+    </div>
+    <div class='form-group'>
+      <label for='subjectDatetime'>End date and time of event</label>
+      <input type='text' id='subjectDatetime' class='form-control' ng-model='news[id].enddatetime'/>
+      <datetimepicker data-ng-model="news[id].enddatetime"></datetimepicker>
     </div>
     <div class='form-group'>
       <label for='subjectLocation'>Location</label>
@@ -56,7 +61,7 @@
       {{item.title}}
     </td>
     <td>{{item.text}}</td>
-    <td>{{item.datetime | date:'medium'}}</td>
+    <td>{{item.datetime | date:'medium'}}<span ng-show='item.enddatetime'> - {{ item.enddatetime | date:'medium' }}</span></td>
     <td width='50px'>
       <button class='btn btn-info' ng-click='item.published = false' ng-show='item.published'>Published</button>
       <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='editingThis(item)'>Not published</button>
