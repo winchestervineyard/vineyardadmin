@@ -12,6 +12,10 @@
 <div ng-show='editing'>
   <form role='form'>
     <div class='form-group'>
+      <label for='subjectSlidesURL'>Series name (optional)</label>
+      <input type='text' id='subjectSeriesName' class='form-control' ng-model='talks[id].series_name'/>
+    </div>
+    <div class='form-group'>
       <label for='subjectTitle'>Title</label>
       <input type='text' id='subjectTitle' class='form-control' ng-model='talks[id].title'/>
     </div>
@@ -25,7 +29,7 @@
       <datetimepicker data-ng-model="talks[id].datetime"></datetimepicker>
     </div>
     <div class='form-group'>
-      <label for='subjectSlidesURL'>Slides URL</label>
+      <label for='subjectSlidesURL'>Slides URL (optional)</label>
       <input type='text' id='subjectSlidesURL' class='form-control' ng-model='talks[id].slides_url'/>
     </div>
     <div class='form-group'>
@@ -45,11 +49,12 @@
   </thead>
   <tr ng-repeat='item in talks | orderByPriority'>
     <td width='250'>
-      {{item.title}}
+      <span ng-show='item.series_name'>{{item.series_name}}:</span> {{item.title}}
     </td>
     <td>{{item.who}}</td>
     <td>{{item.datetime | date:'medium'}}</td>
-    <td><a href='{{item.download_url}}'>{{item.download_url}}</a></td>
+    <td><a href='{{item.download_url}}'>{{item.download_url | limitTo: 30}} ...</a></td>
+    <td><a href='{{item.slides_url}}'>{{item.slides_url | limitTo: 30}} ...</a></td>
     <td width='50px'>
       <button class='btn btn-info' ng-click='item.published = false' ng-show='item.published'>Published</button>
       <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='editingThis(item)'>Not published</button>
