@@ -37,6 +37,14 @@ define([], function() {
       scope.doneEditing = function() {
         scope.editing = false;
       };
+
+      scope.publish = function(item) {
+        item.published = true;
+      }
+
+      scope.unpublish = function(item) {
+        item.published = false;
+      }
     };
   };
 });

@@ -63,8 +63,8 @@
     <td>{{item.text}}</td>
     <td>{{item.datetime | date:'medium'}}<span ng-show='item.enddatetime'> - {{ item.enddatetime | date:'medium' }}</span></td>
     <td width='50px'>
-      <button class='btn btn-info' ng-click='item.published = false' ng-show='item.published'>Published</button>
-      <button class='btn btn-danger' ng-click='item.published = true' ng-hide='item.published' ng-disabled='editingThis(item)'>Not published</button>
+      <button class='btn btn-info' ng-click='unpublish(item)' ng-show='item.published'>Published</button>
+      <button class='btn btn-danger' ng-click='publish(item)' ng-hide='item.published' ng-disabled='editingThis(item)'>Not published</button>
     </td>
     <td width='50px'>
       <button class='btn btn-default' ng-hide='item.published || editingThis(item)' ng-click='edit(item.id)'>Edit</button>
