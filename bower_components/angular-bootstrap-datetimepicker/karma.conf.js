@@ -22,17 +22,19 @@ module.exports = function (config) {
       'karma-jasmine',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
+      'karma-phantomjs-launcher',
       'karma-coverage'
     ],
 
     files: [
-      'bower_components/jquery/jquery.js',
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/moment/moment.js',
+      'bower_components/moment/locale/*.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'src/js/datetimepicker.js',
-      'test/*.spec.js'
+      'test/**/*.spec.js'
     ],
 
     // list of files to exclude
@@ -42,6 +44,14 @@ module.exports = function (config) {
 
     preprocessors: {
       '**/src/js/*.js': ['coverage']
+    },
+
+    // optionally, configure the reporter
+    coverageReporter: {
+      reporters: [
+        {type: 'json', dir: 'coverage/'},
+        {type: 'html', dir: 'coverage/'}
+      ]
     },
 
     // test results reporter to use
@@ -86,6 +96,6 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: true
+    singleRun: false
   });
 };
