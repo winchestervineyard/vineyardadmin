@@ -17,6 +17,7 @@ define([
   'controllers/main',
   'controllers/news',
   'controllers/talks',
+  'controllers/hellobar',
   'controllers/login'
 ], function(angular) {
 
