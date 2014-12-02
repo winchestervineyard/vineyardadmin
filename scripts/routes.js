@@ -20,6 +20,11 @@ define([
       templateUrl: 'views/news.html',
       controller: 'NewsController'
     })
+    .when('/hellobar', {
+      authRequired: true,
+      templateUrl: 'views/hellobar.html',
+      controller: 'HellobarController'
+    })
     .when('/talks', {
       authRequired: true,
       templateUrl: 'views/talks.html',
