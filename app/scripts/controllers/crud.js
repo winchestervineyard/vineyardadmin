@@ -40,11 +40,11 @@ define([], function() {
 
       scope.publish = function(item) {
         item.published = true;
-      }
+      };
 
       scope.unpublish = function(item) {
         item.published = false;
-      }
+      };
     };
   };
 });
